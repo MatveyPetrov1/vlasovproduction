@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("./db");
 const nodemailer = require("nodemailer");
+const cors = require("cors");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
@@ -16,6 +17,8 @@ const transporter = nodemailer.createTransport({
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.get("/photos", async (req, res) => {
   const photos = await db.query("SELECT * from mainphotos");
